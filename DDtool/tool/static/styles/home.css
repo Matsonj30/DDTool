@@ -1,0 +1,58 @@
+:root{
+    --green: #46a753e1;
+    --black: #242124;
+}
+body {
+	background: linear-gradient(-45deg, var(--black), #23a6d5, var(--green));
+	background-size: 400%;
+	animation: gradient 15s ease infinite;
+	height: 100vh;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+.tradingview-widget-copyright{
+
+}
+.searchContainer{
+    margin-top: 5px;
+    display: flex;
+    justify-content: center;
+}
+.searchTicker{
+    width: 40%;
+}
+.search{
+    margin-top: 5px;
+    width: 80%;
+    height: 50px;
+    text-decoration: none;
+    border: 3px solid var(--green);
+    border-radius: 10px 0 0 10px;
+    border-right: none;
+    font-size: 25px;
+    text-align: center;
+
+}
+.submitButton{
+    height: 50px;
+    width: max(10%,50px);
+    transform: translatex(-5px);
+    text-align: center;
+    font-size: 25px;
+    background-color: white;
+    border: none;
+    border-radius: 0 10px 10px 0;
+    border: 3px solid var(--green);
+    cursor: pointer;
+}
