@@ -16,11 +16,10 @@ def getInfo(request, ticker):
 
    
     balanceSheetData = balanceSheet()
+    incomeStatementData = incomeStatement()
     newsArticles = getNews()
    
-
-
-
+    
 
 
 
@@ -49,24 +48,33 @@ def getInfo(request, ticker):
 
 def getNews():
     newsArticles = []
-    
     for value in news.get_yf_rss("nflx"):
         tempArray = []
-        print(value.get('summary'))
-        print(value.get("link"))
         tempArray.append(value.get('summary'))
         tempArray.append(value.get('link'))
         newsArticles.append(tempArray)
 
-    for article in newsArticles:
-        print(article)
-        print("")
+
+    return newsArticles
+
+def incomeStatement():
+    annualValues = {}
+
+    annualSheet = get_income_statement("xspa", TTM = True)
+    print(annualSheet)
+
+    annualValues["totalRevenue"] = annualSheet.loc[['totalRevenue']].to_numpy().flatten() 
+    annualValues["COGS"] = annualSheet.loc[['costOfRevenue']].to_numpy().flatten() 
+    annualValues["grossProfit"] = annualSheet.loc[['grossProfit']].to_numpy().flatten()
+    annualValues["totalExpenses"] = annualSheet.loc[['totalOperatingExpenses']].to_numpy().flatten()
+    annualValues["operatingIncome"] = annualSheet.loc[['operatingIncome']].to_numpy().flatten()
+    annualValues["netIncome"] = annualSheet.loc[['netIncome']].to_numpy().flatten()
 
 def balanceSheet():
     quartAndAnnual = [] #last four quarters if want?
 
     annualValues = {} #last four years standing
-    annualSheet = (get_balance_sheet("xspa"))
+    annualSheet = get_balance_sheet("xspa")
 
 
     annualValues["times"] = list(annualSheet) #get X axis titles AKA timeframes
@@ -77,6 +85,7 @@ def balanceSheet():
     annualValues["inventory"] = annualSheet.loc[['inventory']].to_numpy().flatten()
     annualValues["totalLiabilities"] = annualSheet.loc[['totalLiab']].to_numpy().flatten()
     annualValues["currentLiabilities"] = annualSheet.loc[['totalCurrentLiabilities']].to_numpy().flatten()
+    
     #put noncurrent liabilities here
     
     return annualValues
