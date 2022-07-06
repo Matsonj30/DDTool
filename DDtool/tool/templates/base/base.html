@@ -6,9 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jared's DD Tool</title>
-    {% block site_css %}
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <link  rel="stylesheet" href="{% static 'styles/home.css' %}">
+    {% block site_css %}
     {% endblock %}
 </head>
 <body>
@@ -17,6 +17,13 @@
     <form class="searchTicker" method=POST action="{% url 'infoPage' 'searched' %}" >
         {% csrf_token %}
         <input class="search" type="search" placeholder="Search..." name="searched">
+        <label for="exchange"></label>
+        <select name="exchanges" id="exchange">
+            <option value="NASDAQ">NASDAQ</option>
+            <option value="TSE">TSE</option>
+            <option value="NYSE">NYSE</option>
+            <option value="CVE">CVE</option>
+         </select>
         <button type="submit" class="submitButton">
             <i class="fa fa-search"></i>
         </button>
