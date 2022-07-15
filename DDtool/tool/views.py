@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from bs4 import BeautifulSoup
-import requests
 import fundamentalanalysis as fa
 from yahoo_fin.stock_info import *
 from yahoo_fin import news
@@ -16,16 +15,13 @@ def getInfo(request, ticker):
     apiKey = "bdb926020e885632b760c8a5f35b7e8b"
     """ print(fa.quote("ACB", apiKey)) """
     """ print(fa.balance_sheet_statement("ACB", apiKey, period="quarter")) """
-
    
+    
     balanceSheetData = balanceSheet()
     incomeStatementData = incomeStatement()
     cashFlowData = cashFlow()
     newsArticles = getNews()
    
-    
-    print(cashFlowData)
-
 
     """ GET POST INFO ON GOOGLE FIANANCE
      if request.method == "POST":
